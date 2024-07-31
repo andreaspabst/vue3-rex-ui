@@ -65,6 +65,7 @@ const props = defineProps({
 
 const bgColorClasses = computed(() => {
   return {
+    'default' : 'bg-white',
     'primary': 'bg-blue-100',
     'secondary': 'bg-gray-100',
     'info': 'bg-teal-100',
@@ -78,16 +79,17 @@ const bgColorClasses = computed(() => {
 const shadowSizeClasses = computed(() => {
   return {
     'sm': 'shadow-sm',
-    'md': 'shadow-md',
-    'lg': 'shadow-lg',
-    'xl': 'shadow-xl',
-    '2xl': 'shadow-2xl',
-    '3xl': 'shadow-3xl',
+    'md': 'shadow-sm',
+    'lg': 'shadow-md',
+    'xl': 'shadow-md',
+    '2xl': 'shadow-lg',
+    '3xl': 'shadow-lg',
   };
 });
 
 const borderClasses = computed(() => {
   return {
+    'default' : 'border-gray-200',
     'primary': 'border-blue-500',
     'secondary': 'border-gray-500',
     'info': 'border-teal-500',
@@ -100,6 +102,7 @@ const borderClasses = computed(() => {
 
 const colorClsases = computed(() => {
   return {
+    'default' : 'text-gray-800',
     'primary': 'text-gray-900',
     'secondary': 'text-gray-700',
     'info': 'text-teal-700',

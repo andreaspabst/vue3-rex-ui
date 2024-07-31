@@ -81,10 +81,10 @@ const pyClasses = computed(() => {
   return {
     'sm': 'py-1.5',
     'md': 'py-2',
-    'lg': 'py-3',
-    'xl': 'py-4',
-    '2xl': 'py-5',
-    '3xl': 'py-6',
+    'lg': 'py-2.5',
+    'xl': 'py-2.5',
+    '2xl': 'py-3',
+    '3xl': 'py-3',
   };
 });
 const textSizeClasses = computed(() => {
