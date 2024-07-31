@@ -3,11 +3,11 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import './index.css'
 
-// import { createFormPlugin } from './plugins/Vue3FormHelper.ts'
-// const formPlugin = createFormPlugin(axiosInstance);
+import {createRexUI} from "@/plugins/Vue3RexUI.js";
 
 const app = createApp(App);
 
-// app.use(formPlugin);
+const rexUi = createRexUI();
+app.use(rexUi)
 
 app.mount('#app');
