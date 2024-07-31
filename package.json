@@ -1,10 +1,10 @@
 {
   "name": "vue3-rex-ui",
   "type": "module",
-  "description": "A Vue 3 form helper to simplify form handling of a Single Page Application",
+  "description": "A tiny Vue 3 UI library with Tailwind CSS",
   "private": false,
   "author": "Andreas \"IT Pabst\" Pabst",
-  "version": "1.0.7",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/vue3-rex-ui.umd.cjs",
   "module": "dist/vue3-rex-ui.js",
@@ -48,13 +48,12 @@
     "vuejs",
     "vue",
     "vue.js",
-    "forms",
-    "form",
-    "vuejs forms",
-    "vue forms",
-    "vue.js forms",
-    "form helper",
-    "javascript"
+    "vue tailwind css",
+    "vue3",
+    "vue3 components",
+    "vue3 ui",
+    "vue3 ui components",
+    "vue3 ui library"
   ],
   "bugs": {
     "url": "https://github.com/andreaspabst/vue3-rex-ui/issues"

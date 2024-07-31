@@ -1,86 +1,69 @@
 <template>
   <div class="container mt-5">
-    <h1>Vue JS 3 Form Helper Plugin</h1>
-    <p>
-      This is a simple Vue 3 form helper plugin that provides form validation, form submission, and form reset functionality.
-    </p>
-    <form @submit.prevent="submitForm" style="width: 400px;" class="d-flex flex-column gap-3" v-if="true">
-      <div class="d-flex justify-content-between">
-        <label for="name" class="w-50">Name:</label>
-        <input v-model="form.data.name" type="text" id="name" class="form-control" />
+    <h1 class="text-3xl font-bold">Vue3 Rex UI</h1>
+    <p>Vue3 Rex UI is a collection of components for Vue3.</p>
+    <div class="space-y-3">
+      <h2 class="text-2xl font-bold mt-5 border-b border-gray-200 pb-2">Alerts</h2>
+      <p>Alerts are used to show a message to the user.</p>
+      <h3 class="text-lg font-semibold mt-3">Alert Variants</h3>
+      <div class="flex flex-col gap-2">
+        <RexAlert v-for="variant in alertVariants" :variant="variant" :key="variant">{{ ucFirst(variant) }}</RexAlert>
       </div>
-      <span v-if="form.errors.name">{{ form.errors.name }}</span>
-      <div class="d-flex justify-content-between">
-        <label for="image" class="w-50">Image:</label>
-        <input @change="form.data.image = $event.target.files[0]" type="file" id="image" class="form-control" />
+      <h3 class="text-lg font-semibold mt-3">Alert Sizes</h3>
+      <div class="flex flex-col gap-2">
+          <RexAlert v-for="size in alertSizes" :size="size" :key="size">{{ ucFirst(size) }}</RexAlert>
       </div>
-      <span v-if="form.errors.image">{{ form.errors.image }}</span>
-      <div class="d-flex justify-content-between">
-        <label for="email" class="w-50">Email:</label>
-        <input v-model="form.data.email" type="email" id="email" class="form-control" />
+    </div>
+    <div class="space-y-3">
+      <h2 class="text-2xl font-bold mt-5 border-b border-gray-200 pb-2">Buttons</h2>
+      <p>Buttons are used to initialize an action.</p>
+      <h3 class="text-lg font-semibold mt-3">Button Variants</h3>
+      <div class="flex gap-2">
+        <RexButton v-for="variant in buttonVariants" :variant="variant" :key="variant" @click="clickCallback">{{ ucFirst(variant) }}</RexButton>
       </div>
-      <span v-if="form.errors.email">{{ form.errors.email }}</span>
-      <div class="d-flex justify-content-between">
-        <label for="age" class="w-50">Age:</label>
-        <input v-model="form.data.age" type="number" id="age" class="form-control" />
+      <h3 class="text-lg font-semibold mt-3">Button Sizes</h3>
+      <div class="flex gap-2">
+        <span v-for="size in buttonSizes" :key="size">
+          <RexButton :size="size" @click="clickCallback">{{ ucFirst(size) }}</RexButton>
+        </span>
       </div>
-      <span v-if="form.errors.age">{{ form.errors.age }}</span>
-      <div class="d-flex justify-content-between">
-        <label for="deleted_at" class="w-50">Deleted At:</label>
-        <input v-model="form.data.deleted_at" type="date" id="deleted_at" class="form-control" />
+    </div>
+    <div class="space-y-3">
+      <h2 class="text-2xl font-bold mt-5 border-b border-gray-200 pb-2">Inputs</h2>
+      <p>Inputs are used to get data from the user.</p>
+      <h3 class="text-lg font-semibold mt-3">Input Variants</h3>
+      <div class="flex gap-2">
+        <RexTextInput v-for="variant in inputVariants" :variant="variant" v-model="inputExampleContent" :key="variant" />
       </div>
-      <span v-if="form.errors.deleted_at">{{ form.errors.deleted_at }}</span>
-      <div class="d-flex justify-content-between">
-        <label for="is_active" class="w-50">Is Active:</label>
-        <input v-model="form.data.is_active" type="checkbox" id="is_active" class="" />
+      <h3 class="text-lg font-semibold mt-3">Input Sizes</h3>
+      <div class="flex gap-2">
+        <span v-for="size in inputSizes" :key="size">
+          <RexTextInput :size="size" v-model="inputExampleContent" />
+        </span>
       </div>
-      <span v-if="form.errors.is_active">{{ form.errors.is_active }}</span>
-      <div v-if="form.is_dirty" class="alert alert-primary alert-xs">
-        The form has unsaved changes
-      </div>
-      <div class="d-flex gap-1">
-        <button type="submit" :disabled="form.processing === true">Submit</button>
-        <button type="button" @click="resetForm" :disabled="form.processing === true">Reset</button>
-      </div>
-    </form>
+    </div>
+    <div class="mt-10 mb-12">&nbsp;</div>
   </div>
 </template>
 
 
 <script setup>
-import {computed, defineComponent, inject, onMounted} from 'vue';
-import { useForm } from "./plugins/Vue3FormHelper.ts";
+import {computed, defineComponent, inject, onMounted, ref} from 'vue';
+import RexAlert from '@/components/Rex/Alert/Alert.vue';
+const alertSizes = ['sm', 'md', 'lg', 'xl', '2xl', '3xl'];
+const alertVariants = ['primary', 'secondary', 'info', 'success', 'warning', 'danger', 'light'];
 
-const form = useForm(
-    {
-      name: 'Andreas Pabst',
-      email: 'email@example.com',
-      age: 32,
-      is_active: true,
-      deleted_at: null,
-      image: null,
-    }
-);
+import RexButton from '@/components/Rex/Button/Button.vue';
+const buttonSizes = ['sm', 'md', 'lg', 'xl', '2xl', '3xl'];
+const buttonVariants = ['primary', 'secondary', 'info', 'success', 'warning', 'danger', 'light'];
 
-async function submitForm() {
-  try {
-    await form.submit('POST', '/submit-form', {
-      forceFormData: form.data.image !== null,
-    });
-    alert('Form submitted successfully');
-  } catch (error) {
-    console.error(error);
-  }
-}
+import RexTextInput from '@/components/Rex/Input/InputText.vue';
+const inputSizes = ['sm', 'md', 'lg', 'xl', '2xl', '3xl'];
+const inputVariants = ['default', 'primary', 'secondary', 'info', 'success', 'warning', 'danger', 'light'];
+const inputExampleContent = ref('Input Example Content');
 
-function resetForm() {
-  console.log(form);
-  form.reset();
-}
-
-onMounted(() => {
-  console.log("Content of form: ",form);
-  console.log("Content of form data: ",form.data);
-  console.log("Content of form data name: ",form.data.name);
-});
+const ucFirst = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+const clickCallback = () => {
+  alert('Button clicked!');
+};
 </script>
