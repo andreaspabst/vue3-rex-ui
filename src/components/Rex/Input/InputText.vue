@@ -30,6 +30,11 @@ const props = defineProps({
     default: 'default',
     validator: (value) => ['default', 'primary', 'secondary', 'info', 'success', 'warning', 'danger', 'light'].includes(value),
   },
+  look: {
+    type: String,
+    default: 'clean',
+    validator: (value) => ['inverted', 'clean', 'dark'].includes(value),
+  },
   size: {
     type: String,
     default: 'md',
@@ -188,6 +193,7 @@ const classesInput = computed(() => {
     'rounded-md',
     textSizeClasses.value[props.size],
     shadowSizeClasses.value[props.size],
+    roundedClasses.value[props.size],
   ];
 });
 

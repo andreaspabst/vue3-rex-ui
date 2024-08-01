@@ -3,7 +3,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import './index.css'
 
-import {createRexUI} from "@/plugins/Vue3RexUI.js";
+import {createRexUI} from "@/plugins/Vue3RexUI.ts";
 
 const app = createApp(App);
 

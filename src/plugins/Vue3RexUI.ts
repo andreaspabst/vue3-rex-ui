@@ -9,6 +9,9 @@ import RexHeader from '@/components/Rex/Header/Header.vue';
 import RexInputText from '@/components/Rex/Input/InputText.vue';
 import RexIcon from '@/components/Rex/Icon/Icon.vue';
 import RexIconClose from '@/components/Rex/Icon/IconClose.vue';
+import RexMain from '@/components/Rex/Main/Main.vue';
+import RexNav from '@/components/Rex/Nav/Nav.vue';
+import RexNavItem from '@/components/Rex/Nav/NavItem.vue';
 import RexRow from '@/components/Rex/Grid/Row.vue';
 
 /**
@@ -28,6 +31,9 @@ export function createRexUI() {
             app.component('RexIcon', RexIcon);
             app.component('RexIconClose', RexIconClose);
             app.component('RexInputText', RexInputText);
+            app.component('RexNav', RexNav);
+            app.component('RexNavItem', RexNavItem);
+            app.component('RexMain', RexMain);
             app.component('RexRow', RexRow);
         },
     };
