@@ -1,15 +1,33 @@
 <script setup>
 // alert component
 import {computed} from 'vue';
+import { IconClose } from '../Icon'
 const emit = defineEmits(['click']);
 const handleClick = () => {
   emit('click');
 };
 const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: null,
+  },
+  look: {
+    type: String,
+    default: 'clean',
+    validator: (value) => ['clean', 'inverted', 'dark']
+  },
   variant: {
     type: String,
     default: 'primary',
     validator: (value) => ['default', 'primary', 'secondary', 'info', 'success', 'warning', 'danger', 'light'].includes(value),
+  },
+  shadow: {
+    type: Boolean,
+    default: true
+  },
+  closable: {
+    type: Boolean,
+    default: false
   },
   size: {
     type: String,
@@ -18,7 +36,7 @@ const props = defineProps({
   },
   border: {
     type: Boolean,
-    default: false
+    default: true
   },
   rounded: {
     type: Boolean,
@@ -32,28 +50,78 @@ const props = defineProps({
 });
 
 const bgColorClasses = computed(() => {
-  return {
-    'default' : 'bg-white',
-    'primary': 'bg-blue-100',
-    'secondary': 'bg-gray-100',
-    'info': 'bg-teal-100',
-    'success': 'bg-green-100',
-    'warning': 'bg-yellow-100',
-    'danger': 'bg-red-100',
-    'light': 'bg-gray-100',
-  };
+  switch (props.look) {
+    case 'inverted':
+      return {
+        'default' : 'bg-white',
+        'primary': 'bg-blue-100',
+        'secondary': 'bg-gray-100',
+        'info': 'bg-teal-100',
+        'success': 'bg-green-100',
+        'warning': 'bg-yellow-100',
+        'danger': 'bg-red-100',
+        'light': 'bg-gray-100',
+      };
+    case 'dark':
+      return {
+        'default' : 'bg-gray-100',
+        'primary': 'bg-blue-500',
+        'secondary': 'bg-gray-500',
+        'info': 'bg-teal-500',
+        'success': 'bg-green-500',
+        'warning': 'bg-yellow-500',
+        'danger': 'bg-red-500',
+        'light': 'bg-gray-500',
+      };
+    default:
+      return {
+        'default' : 'bg-white',
+        'primary': 'bg-white',
+        'secondary': 'bg-white',
+        'info': 'bg-white',
+        'success': 'bg-white',
+        'warning': 'bg-white',
+        'danger': 'bg-white',
+        'light': 'bg-white',
+      }
+    }
 });
 const borderClasses = computed(() => {
-  return {
-    'default' : 'border-gray-500',
-    'primary': 'border-blue-500',
-    'secondary': 'border-gray-500',
-    'info': 'border-teal-500',
-    'success': 'border-green-500',
-    'warning': 'border-yellow-500',
-    'danger': 'border-red-500',
-    'light': 'border-gray-500',
-  };
+  switch (props.look) {
+    case 'inverted':
+      return {
+        'default' : 'border-white',
+        'primary': 'border-blue-100',
+        'secondary': 'border-gray-100',
+        'info': 'border-teal-100',
+        'success': 'border-green-100',
+        'warning': 'border-yellow-100',
+        'danger': 'border-red-100',
+        'light': 'border-gray-100',
+      };
+    case 'dark':
+      return {
+        'default' : 'border-gray-100',
+        'primary': 'border-blue-500',
+        'secondary': 'border-gray-500',
+        'info': 'border-teal-500',
+        'success': 'border-green-500',
+        'warning': 'border-yellow-500',
+        'danger': 'border-red-500',
+        'light': 'border-gray-500',
+      };
+    default:
+      return {
+        'default' : 'border-gray-200',
+        'primary': 'border-blue-200',
+        'secondary': 'border-gray-200',
+        'info': 'border-teal-200',
+        'success': 'border-green-200',
+        'warning': 'border-yellow-200',
+        'danger': 'border-red-200',
+        'light': 'border-gray-200',
+      };
+  }
 });
 const colorClasses = computed(() => {
   return {
@@ -107,12 +175,36 @@ const roundedClasses = computed(() => {
     '3xl': 'rounded-3xl',
   };
 });
+const shadowSizeClasses = computed(() => {
+  return {
+    'sm': 'shadow-sm',
+    'md': 'shadow-md',
+    'lg': 'shadow-lg',
+    'xl': 'shadow-xl',
+    '2xl': 'shadow-2xl',
+    '3xl': 'shadow-3xl',
+  };
+});
+
+const shadowColorClasses = computed(() => {
+  return {
+    'default' : 'shadow-gray-200/25',
+    'primary': 'shadow-blue-200/25',
+    'secondary': 'shadow-gray-200/25',
+    'info': 'shadow-teal-200/25',
+    'success': 'shadow-green-200/25',
+    'warning': 'shadow-yellow-200/25',
+    'danger': 'shadow-red-200/25',
+    'light': 'shadow-gray-200/25',
+  };
+});
 
 const classes = computed(() => {
   return [
-    'flex',
+    'flex justify-between',
     props.border ? ['border', 'border-solid', borderClasses.value[props.variant]] : null,
     props.rounded ? roundedClasses.value[props.size] : null,
+    props.shadow ? [ shadowSizeClasses.value[props.size], shadowColorClasses.value[props.variant]] : null,
     pxClasses.value[props.size],
     pyClasses.value[props.size],
     textSizeClasses.value[props.size],
@@ -120,10 +212,21 @@ const classes = computed(() => {
     colorClasses.value[props.variant],
   ];
 });
+const iconSizeMap = {
+  'sm': 'sm',
+  'md': 'sm',
+  'lg': 'md',
+  'xl': 'lg',
+  '2xl': 'lg',
+  '3xl': 'lg',
+};
+const show = computed(() => {
+  return props.modelValue === null || props.modelValue === true;
+});
 </script>
 
 <template>
-  <div :class="classes" @click="handleClick">
+  <div :class="classes" @click="handleClick" v-show="show">
     <template v-if="$slots.icon && props.iconPosition === 'left'">
       <div class="mr-2">
         <slot name="icon"></slot>
@@ -133,6 +236,13 @@ const classes = computed(() => {
     <template v-if="$slots.icon && props.iconPosition === 'right'">
       <div class="ml-2">
         <slot name="icon"></slot>
+      </div>
+    </template>
+    <template v-if="$slots.close || props.closable">
+      <div class="ml-auto">
+        <slot name="close">
+          <IconClose :size="iconSizeMap[props.size]" />
+        </slot>
       </div>
     </template>
   </div>

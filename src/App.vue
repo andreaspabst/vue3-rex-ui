@@ -11,15 +11,23 @@
       </div>
       <h3 class="text-lg font-semibold mt-3">Alert Sizes</h3>
       <div class="flex flex-col gap-2">
-          <RexAlert v-for="size in alertSizes" :size="size" :key="size">{{ ucFirst(size) }}</RexAlert>
+          <RexAlert v-for="size in alertSizes" :size="size" :key="size" :closable="true">{{ ucFirst(size) }}</RexAlert>
       </div>
     </div>
     <div class="space-y-3">
       <h2 class="text-2xl font-bold mt-5 border-b border-gray-200 pb-2">Buttons</h2>
       <p>Buttons are used to initialize an action.</p>
-      <h3 class="text-lg font-semibold mt-3">Button Variants</h3>
+      <h3 class="text-lg font-semibold mt-3">Button Variants (Inverted Look)</h3>
       <div class="flex gap-2">
-        <RexButton v-for="variant in buttonVariants" :variant="variant" :key="variant" @click="clickCallback">{{ ucFirst(variant) }}</RexButton>
+        <RexButton v-for="variant in buttonVariants" :variant="variant" look="inverted" :key="variant" @click="clickCallback">{{ ucFirst(variant) }}</RexButton>
+      </div>
+      <h3 class="text-lg font-semibold mt-3">Button Variants (Clean Look)</h3>
+      <div class="flex gap-2">
+        <RexButton v-for="variant in buttonVariants" :variant="variant" look="clean" :key="variant" @click="clickCallback">{{ ucFirst(variant) }}</RexButton>
+      </div>
+      <h3 class="text-lg font-semibold mt-3">Button Variants (Dark Look)</h3>
+      <div class="flex gap-2">
+        <RexButton v-for="variant in buttonVariants" :variant="variant" look="dark" :key="variant" @click="clickCallback">{{ ucFirst(variant) }}</RexButton>
       </div>
       <h3 class="text-lg font-semibold mt-3">Button Sizes</h3>
       <div class="flex gap-2">
