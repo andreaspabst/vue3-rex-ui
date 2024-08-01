@@ -1,21 +1,25 @@
-// Import necessary modules from vue
 import type { App } from 'vue';
-import { useForm } from './plugins/Vue3FormHelper';
+import RexAlert from '@/components/Rex/Alert/Alert.vue';
+import RexButton from '@/components/Rex/Button/Button.vue';
+import RexInputText from '@/components/Rex/Input/InputText.vue';
+import RexIcon from '@/components/Rex/Icon/Icon.vue';
+import RexIconClose from '@/components/Rex/Icon/IconClose.vue';
+import RexApp from '@/components/Rex/App/App.vue';
 
 /**
- * Interface for Vue3FormHelper
- * @interface Vue3FormHelper
+ * Create the UI Library
  */
-interface Vue3FormHelper {
-    // Method to install the plugin
-    install: (app: App) => void;
-}
+export function createRexUI() {
 
-export function createFormPlugin() {
     return {
-        install: (app: App) => {
-            // Provide useForm function to all components
-            app.provide('useForm', useForm);
-        }
-    }
+        install(app: App) {
+            // register RexAlert, RexButton, RexInputText, RexApp
+            app.component('RexAlert', RexAlert);
+            app.component('RexButton', RexButton);
+            app.component('RexIcon', RexIcon);
+            app.component('RexIconClose', RexIconClose);
+            app.component('RexInputText', RexInputText);
+            app.component('RexApp', RexApp);
+        },
+    };
 }

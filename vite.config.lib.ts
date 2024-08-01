@@ -5,8 +5,8 @@ import baseConfig from './vite.config';
 const libConfig = defineConfig({
     build: {
         lib: {
-            entry: resolve(__dirname, 'src/plugins/Vue3FormHelper.ts'),
-            name: 'Vue3FormHelper',
+            entry: resolve(__dirname, 'src/plugins/Vue3RexUI.ts'),
+            name: 'Vue3RexUI',
             fileName: 'vue3-rex-ui',
         },
         rollupOptions: {
