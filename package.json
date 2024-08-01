@@ -4,7 +4,7 @@
   "description": "A tiny Vue 3 UI library with Tailwind CSS",
   "private": false,
   "author": "Andreas \"IT Pabst\" Pabst",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "main": "dist/vue3-rex-ui.umd.cjs",
   "module": "dist/vue3-rex-ui.js",
